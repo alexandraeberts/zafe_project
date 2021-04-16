@@ -1,0 +1,52 @@
+--Important SQL Queries
+--All appointments for Amelia Shepherd on 12/6/2020, listing Patient Name and contact information
+SELECT d.firstname as DoctorFirstName, d.lastName as DoctorLastName, a.AppointmentTime as Time, 
+a.appointmentdate as Date, p.FirstName as PatientFirstName, p.lastName as PatientLastName, p.PhoneNumber as PhoneNumber, p.EmailAddress as EmailAddress
+FROM doctor AS d
+INNER JOIN appointment AS a
+ON d.npinumber = a.npinumber
+INNER JOIN patient as p
+ON p.patientID = a.patientID
+WHERE d.NPINumber = 2385192847 AND appointmentdate = '2020-12-06';
+
+--All appointments for Bob Anderson sorted by ascending date
+SELECT p.FirstName as firstName, p.LastName as lastName, 
+a.appointmentdate as appointmentDate,
+a.AppointmentTime as appointmentTime, a.appointmentdescription as for,
+d.FirstName as DoctorFirstName, 
+d.LastName as DoctorLastName
+FROM patient AS p
+INNER JOIN appointment AS a
+ON p.patientid = a.patientid
+INNER JOIN doctor as d
+ON a.NPINumber = d.NPINumber
+WHERE p.lastname = 'Anderson';
+
+--Insurance info for Bob Anderson for 12/5/2020 appointment
+SELECT p.FirstName as PatientFirstName, p.lastname as PatientLastName,
+a.appointmentdate as appointmentdate, pr.medicationnotes as medicationnotes,
+i.InsuranceProvider as Provider, i.PolicyNumber as PolicyNumber,
+i.GroupNumber as GroupNumber
+FROM patient as p
+INNER JOIN appointment as a
+ON p.patientID = a.patientID
+INNER JOIN PatientRecord as pr
+ON pr.patientID = a.patientID
+INNER JOIN Insurance as i
+ON i.recordid = pr.recordid
+WHERE a.appointmentdate = '2020-12-05' and p.FirstName = 'Bob' and p.lastname = 'Anderson';
+
+--All doctors who have seen patients with Blue Cross
+SELECT DISTINCT p.patientid, p.firstname as patientfirstname, p.lastname as patientlastname,
+i.insuranceprovider, d.npinumber, d.firstname, d.lastname, d.hospitalaffiliation, 
+a.appointmentdate, a.appointmenttime
+FROM doctor AS d
+INNER JOIN appointment AS a
+USING (NPINUMBER)
+INNER JOIN patientrecord AS pr
+USING (patientid)
+INNER JOIN patient as p
+USING (patientid)
+inner join insurance AS i
+USING (recordid)
+WHERE insuranceprovider = 'Blue Cross HMO';

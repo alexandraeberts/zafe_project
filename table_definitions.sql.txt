@@ -1,0 +1,73 @@
+--Table Definitions
+
+-- Patient
+
+CREATE TABLE  Patient (
+PatientID 		SERIAL PRIMARY KEY,
+FirstName		TEXT NOT NULL, 
+LastName		TEXT NOT NULL, 
+DateOfBirth		DATE NOT NULL CHECK(DateOfBirth >= '1900-01-01'),
+HomeAddress		VARCHAR(150) NOT NULL, 
+PhoneNumber		VARCHAR(11) NOT NULL, 
+EmailAddress		VARCHAR(50) NOT NULL
+);
+
+-- PatientRecord
+
+CREATE TABLE PatientRecord (
+RecordID	  	SERIAL PRIMARY KEY, 
+RecordDate	  	DATE NOT NULL, 
+AllergyNotes	  	TEXT DEFAULT 'None', 
+MedicationNotes	TEXT NOT NULL, 
+ImmunizationHistory 	TEXT DEFAULT 'None', 
+Diagnoses		VARCHAR(250) NOT NULL, 
+Weight			INT NOT NULL,
+Height			INT NOT NULL, 
+PatientID 		INT,
+CONSTRAINT PatientRecord_Patient_fk FOREIGN KEY(PatientID)
+ 	REFERENCES Patient (PatientID)
+ON UPDATE CASCADE ON DELETE NO ACTION 
+);
+ 
+-- Doctor
+
+CREATE TABLE Doctor (
+NPINumber		BIGINT PRIMARY KEY,
+FirstName		TEXT NOT NULL, 
+LastName		TEXT NOT NULL, 
+PhoneNumber		VARCHAR(11) NOT NULL, 
+EmailAddress		VARCHAR(50) NOT NULL, 
+OfficeAddress		VARCHAR(150) NOT NULL, 
+Specialization		VARCHAR(30) NOT NULL, 
+HospitalAffiliation  	TEXT
+);
+
+-- Appointment
+
+CREATE TABLE Appointment (
+AppointmentID			SERIAL PRIMARY KEY, 
+AppointmentDate		DATE NOT NULL, 
+AppointmentTime		TIME NOT NULL, 
+AppointmentDescription		TEXT, 
+PatientID			INT,
+CONSTRAINT Appointment_Patient_fk FOREIGN KEY(PatientID)
+ 	REFERENCES Patient (PatientID)
+ON UPDATE CASCADE ON DELETE NO ACTION,
+NPINumber			BIGINT,
+CONSTRAINT Appointment_Doctor_fk FOREIGN KEY(NPINumber)
+ 	REFERENCES Doctor (NPINumber)
+ON UPDATE CASCADE ON DELETE NO ACTION
+);
+
+-- Insurance
+CREATE TABLE Insurance (
+InsuranceID		SERIAL PRIMARY KEY,
+PolicyNumber 		INT NOT NULL,
+InsuranceProvider 	VARCHAR(30) NOT NULL,
+PrimaryHolder 		VARCHAR(70) NOT NULL,
+GroupNumber 		VARCHAR(30) NOT NULL,
+RecordID 		INT,
+CONSTRAINT Insurance_PatientRecord_fk FOREIGN KEY(RecordID)
+ 	REFERENCES PatientRecord (RecordID)
+ON UPDATE CASCADE ON DELETE NO ACTION
+);

@@ -1,0 +1,55 @@
+--Seed Data
+INSERT INTO patient (FirstName, LastName, DateOfBirth, HomeAddress, PhoneNumber, EmailAddress)
+VALUES 
+('Alexandra', 'Smith', '1997-06-12', '68 Main St. New York, NY 10212', '16872329124', 'alexsmith@gmail.com'),
+('Steven', 'Jones', '1982-09-17', '109 Elm St. New York, NY 12392', '16469213345', 'stevenjones@gmail.com'),
+('Meghan', 'Williams', '1967-08-12', '267 Washington St. New York, NY 14563', '19298834512', 'mwill@gmail.com'),
+('Janet', 'Miller', '1952-04-16', '68 Main St. New York, NY 10212', '16872329124', 'jmil@gmail.com'),
+('Bob', 'Anderson', '1972-05-19', '150 Washington St. New York, NY 14563', '16745893341', 'band@gmail.com'),
+('Ellis', 'Hamabuchi', '1999-03-01', '55 Lexington Ave. New York, NY 10010', '2011928421', 'ehamabuchi@gmail.com'),
+('Robert', 'Clarke', '1999-03-01', '879 North Union St. Stratford, CT 06614', '5512348765', 'rclarke@gmail.com'),
+('Meredith', 'Grey', '1970-05-02', '4 Park Ave. New York, NY 14891', '5347713909', 'mgrey@greysloan.org'),
+('Alex', 'Karev', '1972-11-11', '49 Arch Dr. West Haven, CT 06516', '6382914726', 'akarev@greysloan.org'),
+('Ellis', 'Grey', '1940-01-04', '4 Park Ave. New York, NY 14891', '5347891283', 'twotimeaverywinner@gmail.com');
+
+
+INSERT INTO PatientRecord(RecordDate, AllergyNotes, MedicationNotes, ImmunizationHistory, Diagnoses, Weight, Height, PatientID)
+VALUES 
+('2020-12-05', 'None', 'None', 'Up-to-date', 'TBD', 121, 171, 1),
+('2020-12-05', 'Treenuts', 'EPI Pen', 'Up-to-date', 'Allergy Testing', 167, 180, 2),
+('2020-12-06', 'Treenuts', 'EPI Pen', 'Up-to-date', 'Allergic to Treenuts and gluten', 167, 180, 2),
+('2020-12-07', 'None', 'Levothyroxine', 'Up-to-date', 'Overall health good', 140, 165, 5),
+('2020-12-07', 'None', 'Razadyne, Exelon', 'Up-to-date', 'Early onset Alzheimer’s, increasing dementia', 140, 170, 10),
+('2020-12-07', 'Strawberries', 'EPI Pen', 'Up-to-date', 'Appendicitis', '200', '188', 9),
+('2020-12-07', 'None', 'None', 'Up-to-date', 'Sick Visit', 130, 172, 7);
+
+
+INSERT INTO Doctor(NPINumber, FirstName, LastName, PhoneNumber, EmailAddress, OfficeAddress, Specialization, HospitalAffiliation)
+VALUES 
+(6732729472, 'Mantis', 'Tobaggan', '14569234156', 'drt@gmail.com', 'Philadelphia, PA', 'Ear Nose and Throat', 'NYU Langone'),
+(4592573829, 'Jennifer', 'Daniels', '13678219824', 'jdaniels@gmail.com', 'New York City', 'Dermatology', 'Mount Sinai'),
+(8062573829, 'John', 'Smith', '15169224578', 'jsmith@gmail.com', 'Huntington, NY', 'Internal Medicine', 'Huntington Hospital'),
+(4384756182, 'Tom', 'Koracick', '2345618273', 'tkorackick@greysloan.org', 'Seattle, WA', 'Neurology', 'Grey Sloan Memorial'),
+(2810471638, 'Teddy', 'Altman', '2342637489', 'taltman@greysloan.org', 'Seattle, WA', 'Cardiology', 'Grey Sloan Memorial'),
+(2385192847, 'Amelia', 'Shepherd', '2344625173', 'ashepherd@greysloan.org', 'Seattle, WA', 'Neurology', 'Grey Sloan Memorial'),
+(3736195732, 'Meredith', 'Grey', '5347713909', 'mgrey@greysloan.org', 'Seattle, WA', 'General Medicine', 'Grey Sloan Memorial');
+
+
+INSERT INTO Appointment(AppointmentDate, AppointmentTime, AppointmentDescription, PatientID, NPINumber)
+VALUES 
+('2020-12-05', '12:00:00', 'Skin Issue', 2, 4592573829),
+('2020-12-05', '13:00:00', 'Skin Issue', 5, 4592573829),
+('2020-12-06', '14:00:00', 'Allergy Testing', 2, 6732729472),
+('2020-12-06', '14:30:00', 'Checkup', 10, 2385192847),
+('2020-12-06', '14:30:00', 'Appendicitis', 9, 3736195732);
+
+
+INSERT INTO Insurance(PolicyNumber, InsuranceProvider, PrimaryHolder, GroupNumber, RecordID)
+VALUES 
+(4689329, 'Cigna PPO', 'Bob Anderson', '905302', 4),
+(3957290, 'Blue Cross HMO','Steven Jones', '398529', 2),
+(3957290, 'Blue Cross HMO','Steven Jones', '398529', 3),
+(3675907, 'Blue Cross HMO','Alexandra Smith', '231245', 1),
+(6532123, 'Blue Cross HMO','Alex Karev', '123212', 6),
+(3234124, 'Blue Cross HMO','Ellis Grey', '554316', 5),
+(1232124, 'Cigna PPO', 'Robert Clarke', '786543', 7);
