@@ -1,5 +1,5 @@
 # zafe_project
-Group 11 Project for CIS9340 
+Group 11 Project for CIS9340 using PostgreSQL
 
 ZAFE is a business that aims to connect patients and doctors through an application, combining the ease of scheduling virtual appointments like OneMedical after finding doctors in your network as one might with ZocDoc. The company offers this service through a subscription with an annual fee. In exchange, patients can determine whether a doctor will accept their insurance, the necessary expertise for their health concerns, and easily maintain all records in one central location. Details regarding any underlying conditions should be more accessible to each of these medical professionals, enabling them to create a more accurate diagnosis and be aware of any important considerations to make when writing prescriptions.
  
